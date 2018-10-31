@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- To use JavaScript files add load %staticfiles% -->
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'TravelPlansApp/css/style.css' %}" >
+    <!-- CDN for Bootstrap -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Google Font - Poiret One-->
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+    <!-- Google Font - Poiret One-->
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+  </head>
+  <body>
+    <div class="wrapper3">
+      <h1><span class="title">travel</span><span class="title2">buddy</span></h1>
+      <p><a href="{% url 'plans:page' %}">Home</a>&nbsp&nbsp|&nbsp<a href="{% url 'buddy:logout' %}">Logout</a></p>
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li{% if message.tags %} class="{{message.tags}}" {% endif %}>
+            {{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <h3 class="dest">Current Travel: {{trips.destination}}</h3>
+      <p class="dest">Planned by: {{planner.name}}</p>
+      <p class="dest">Description: {{trips.description}}</p>
+      <p class="dest">Travel Date Start: {{trips.travelStart}}</p>
+      <p class="dest">Travel End Date: {{trips.travelEnd}}</p>
+      <br><hr><br>
+      <h3 class="dest">Other Joining: </h3>
+      {% for item in joiningusers %}
+        <p class="dest">{{item.name}}</p>
+      {% endfor %}
+    </div>
+  </body>
+</html>

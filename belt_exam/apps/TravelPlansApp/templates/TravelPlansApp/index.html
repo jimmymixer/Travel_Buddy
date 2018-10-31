@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Belt Exam TravelPlansApp</title>
+	<!-- To use JavaScript files add load %staticfiles% -->
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'TravelPlansApp/css/style.css' %}" >
+	<!-- CDN for Bootstrap -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<!-- Google Font - Poiret One-->
+	<link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+	<!-- Google Font - Poiret One-->
+	<link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+</head>
+<body>
+	<div class="wrapper1">
+		<h1><span class="title">travel</span><span class="title2">buddy</span></h1>
+		<p><a style="color:black;" href="{% url 'plans:addTrip' %}">Add Travel Plan</a>&nbsp&nbsp|&nbsp
+		<a style="color:black;" href="{% url 'buddy:logout' %}">Logout</a></p>
+		<div class="main">
+	    <br>
+			<div class="inside">
+			<h1>Your Trip Schedules:</h1>
+			<table>
+				<thead>
+				<tr>
+					<th>Destination</th>
+					<th>Travel Start Date</th>
+					<th>Travel End Date</th>
+					<th>Plan/Description</th>
+				</tr>
+				</thead>
+				{% for item in trips %}
+				<tbody>
+					<tr>
+						<td> <a href="{% url 'plans:showTripPage' id=item.id %}">{{item.destination}}</a> </td>
+						<td>{{item.travelStart}}</td>
+						<td>{{item.travelEnd}}</td>
+	          <td>{{item.description}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+	    <h1>Other User's Travel Plans</h1>
+	    <table>
+				<thead>
+				<tr>
+	        <th>Name</th>
+					<th>Destination</th>
+					<th>Travel Start Date</th>
+					<th>Travel End Date</th>
+					<th>Do You Want to Join?</th>
+				</tr>
+				</thead>
+				{# Checking each trip object #}
+				{% for item in plans %}
+				<tbody>
+					<tr>
+						<td>{{item.planned_user.name}}</td>
+						<td>{{item.destination}}</td>
+						<td>{{item.travelStart}}</td>
+						<td>{{item.travelEnd}}</td>
+		        <td style="text-align: center;"> <a href="{% url 'plans:joinTrip' id=item.id %}">Join</a> </td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+	    <br><br>
+		</div>
+		</div>
+	<script type="text/javascript" src="{% static 'TravelBuddyApp/js/script.js' %}"></script>
+	</div>
+</body>
+</html>

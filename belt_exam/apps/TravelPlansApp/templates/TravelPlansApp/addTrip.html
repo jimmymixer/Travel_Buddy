@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Trip</title>
+    <!-- To use JavaScript files add load %staticfiles% -->
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'TravelPlansApp/css/style.css' %}" >
+    <!-- CDN for Bootstrap -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Google Font - Poiret One-->
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+    <!-- Google Font - Poiret One-->
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+  </head>
+  <body>
+    <div class="wrapper2">
+      <h1><span class="title">travel</span><span class="title2">buddy</span></h1>
+      <p></p><a href="{% url 'plans:page' %}">Home</a> &nbsp&nbsp|&nbsp <a href="{% url 'buddy:logout' %}">Logout</a></p>
+      <h1>Add a Trip</h1>
+      <form  action="{% url 'plans:addTripPlan' %}" method="post">
+        {% csrf_token %}
+        <p>Destination: <input type="text" name="destination" value=""></p>
+        <p>Description: <input type="text" name="description" value=""></p>
+        <p>Travel Date From: <input type="date" name="travelStart"></p>
+        <p>Travel Date To: <input type="date" name="travelEnd"></p>
+        <p><input type="submit" value="Add"></p>
+      </form>
+      {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </body>
+</html>
